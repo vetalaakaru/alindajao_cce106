@@ -1,16 +1,27 @@
 import { Image } from 'expo-image';
-import { StyleSheet, View } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { HelloWave } from '@/components/hello-wave';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 
-export default function HomeScreen() {
+export default function HomeScreen({ incrementBy = 1 }) {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    setCount(prevCount => prevCount + incrementBy);
+  };
+
+  const handleReset = () => {
+    setCount(0);
+  };
+
   return (
     <View style={styles.pageBackground}>
       <ParallaxScrollView
-        headerBackgroundColor={{ dark: '#F8C8DC', light: '#F8C8DC' }}
+        headerBackgroundColor={{ dark: '#D8B4FE', light: '#D8B4FE' }}
         headerImage={
           <Image
             source={require('@/assets/images/partial-react-logo.png')}
@@ -20,39 +31,31 @@ export default function HomeScreen() {
 
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title" style={styles.titleText}>
-            ABOUT ME
+            COUNTER APP 🌸
           </ThemedText>
-          <HelloWave />
         </ThemedView>
 
-        
-        <View style={styles.avatarWrapper}>
-          <Image
-            source={require('@/assets/images/profile.jpg')}
-            style={styles.avatar}
-          />
-        </View>
+        {/* Display the current counter value safely */}
+        <ThemedView style={styles.displayContainer}>
+          <ThemedText style={styles.label}>Current Count:</ThemedText>
+          <View style={styles.numberWrapper}>
+            <ThemedText style={styles.displayText}>
+              {count}
+            </ThemedText>
+          </View>
+        </ThemedView>
 
+        {/* Control Buttons */}
         <ThemedView style={styles.stepContainer}>
-          <ThemedText type="defaultSemiBold" style={styles.bodyText}>
-            Name: Desiree S. Alindajao
-          </ThemedText>
-          <ThemedText type="defaultSemiBold" style={styles.bodyText}>
-            Course/Section: BSIT - CCE 106
-          </ThemedText>
-          <ThemedText type="defaultSemiBold" style={styles.bodyText}>
-            Hobbies: Playing Online Games and Singing
-          </ThemedText>
+          <TouchableOpacity style={styles.controlButton} onPress={handleIncrement}>
+            <ThemedText style={styles.buttonText}>+ {incrementBy}</ThemedText>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
+            <ThemedText style={styles.resetButtonText}>Reset</ThemedText>
+          </TouchableOpacity>
         </ThemedView>
 
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle" style={styles.headingText}>
-            SHORT APP IDEA
-          </ThemedText>
-          <ThemedText style={styles.bodyText}>
-            "I want to create a UTANG TRACKER APP for small sari-sari stores to replace manual record-keeping and make store owners' lives easier and more efficient.
-          </ThemedText>
-        </ThemedView>
       </ParallaxScrollView>
     </View>
   );
@@ -61,47 +64,81 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   pageBackground: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F3E8FF',
   },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    backgroundColor: '#FFFFFF',
-  },
-  avatarWrapper: {
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  avatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    borderWidth: 4,
-    borderColor: '#F8C8DC',
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-    backgroundColor: '#daaebc',
+    backgroundColor: '#FAF5FF',
     padding: 12,
     borderRadius: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#D8B4FE',
   },
   titleText: {
-    color: '#bb9595',
+    color: '#7E22CE',
     fontWeight: 'bold',
-    fontSize: 28,
+    fontSize: 22,
   },
-  headingText: {
-    color: '#7A3B54',
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: 1,
+  displayContainer: {
+    backgroundColor: '#FAF5FF',
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+    marginBottom: 12,
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#D8B4FE',
   },
-  bodyText: {
-    color: '#4A2C3A',
-    fontStyle: 'italic',
-    lineHeight: 20,
+  label: {
+    color: '#581C87',
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 5,
+  },
+  numberWrapper: {
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  displayText: {
+    color: '#7E22CE',
+    fontSize: 38,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
+  },
+  stepContainer: {
+    gap: 10,
+    marginBottom: 12,
+    backgroundColor: '#E9D5FF',
+    padding: 16,
+    borderRadius: 16,
+  },
+  controlButton: {
+    backgroundColor: '#A855F7',
+    padding: 18,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  resetButton: {
+    backgroundColor: '#7E22CE',
+    padding: 14,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  resetButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   reactLogo: {
     height: 250,
