@@ -35,7 +35,7 @@ export default function HomeScreen({ incrementBy = 1 }) {
           </ThemedText>
         </ThemedView>
 
-        {/* Display the current counter value safely */}
+       
         <ThemedView style={styles.displayContainer}>
           <ThemedText style={styles.label}>Current Count:</ThemedText>
           <View style={styles.numberWrapper}>
@@ -45,7 +45,7 @@ export default function HomeScreen({ incrementBy = 1 }) {
           </View>
         </ThemedView>
 
-        {/* Control Buttons */}
+        
         <ThemedView style={styles.stepContainer}>
           <TouchableOpacity style={styles.controlButton} onPress={handleIncrement}>
             <ThemedText style={styles.buttonText}>+ {incrementBy}</ThemedText>
