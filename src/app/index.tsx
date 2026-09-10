@@ -20,15 +20,16 @@ const ActivityItem = ({ title, amount, isLast }) => (
 
 export default function App() {
   const metricData = [
-    { id: '1', title: 'Transportation', value: '560.00' },
-    { id: '2', title: 'Eating / Food', value: '350.00' },
-    { id: '3', title: 'Total Estimated', value: '910.00' },
+    { id: '1', title: 'Transportation (₱80/day)', value: '560.00' },
+    { id: '2', title: 'Food (₱50/day)', value: '350.00' },
+    { id: '3', title: 'Entertainment', value: '50.00' },
+    { id: '4', title: 'Total Estimated', value: '960.00' },
   ];
 
   const recentActivity = [
     { id: '1', title: 'Motor Fare', amount: '80.00' },
     { id: '2', title: 'Lunch & Snacks', amount: '50.00' },
-    { id: '3', title: 'Entertainment', amount: '50.00' },
+    { id: '3', title: 'Entertainment / Comshop', amount: '50.00' },
   ];
 
   return (
@@ -55,7 +56,7 @@ export default function App() {
             </View>
           </View>
           <View style={styles.divider} />
-          <Text style={styles.heroSub}>Allocated: ₱910.00 / week</Text>
+          <Text style={styles.heroSub}>Allocated: ₱960.00 / week</Text>
         </View>
 
         <Text style={styles.sectionTitle}>Category Breakdown</Text>
@@ -142,17 +143,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginTop: 4,
-  },
-  badge: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  badgeText: {
-    color: '#FFF',
-    fontSize: 12,
-    fontWeight: '600',
   },
   divider: {
     height: 1,
