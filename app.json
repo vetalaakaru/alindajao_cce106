@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "stud_atten",
+    "slug": "stud_atten",
+    "scheme": "stud-atten",
+    "version": "1.0.0",
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}
