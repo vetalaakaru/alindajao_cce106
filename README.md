@@ -4,11 +4,11 @@
 
 ### Student Information
 
-Name:
+Name: Desiree S.Alindajao
 
-Section:
+Section: 2013
 
-Date:
+Date: October 2, 2026
 
 ### Required Features
 
