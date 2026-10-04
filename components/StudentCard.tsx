@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 11,
-    backgroundColor: '#eaf1fa',
+    backgroundColor: '#f2f5fa',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: '#315d8e',
+    color: '#536579',
     fontSize: 12,
     fontWeight: '600',
   },

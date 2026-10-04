@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 20,
-    backgroundColor: '#eaf1fa',
+backgroundColor: '#f2f5fa',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 15,
@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
   },
 
   error: {
-    color: '#315d8e',
+    color: '#536579',
     fontSize: 12,
     textAlign: 'center',
     lineHeight: 18,

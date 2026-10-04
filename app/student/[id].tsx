@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     width: '100%',
-    backgroundColor: '#eaf1fa',
+backgroundColor: '#f2f5fa',
     padding: 16,
     borderRadius: 14,
     gap: 6,
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   text: {
-    color: '#315d8e',
+    color: '#536579',
     fontSize: 16,
   },
   error: {
