@@ -42,7 +42,7 @@ export default function SignInScreen() {
 
       const testUser = {
         id: 1,
-        name: 'Test Student',
+        name: 'Student',
         email: testEmail,
         role: 'student',
       };
@@ -76,7 +76,7 @@ export default function SignInScreen() {
           <Text style={styles.logoText}>S</Text>
         </View>
 
-        <Text style={styles.brand}>StudentHub</Text>
+        
       </View>
 
       <View style={styles.card}>

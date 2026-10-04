@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   View,
+  useColorScheme,
 } from 'react-native';
 
 type Profile = {
@@ -16,7 +17,27 @@ type Profile = {
   role?: string;
 };
 
+// Defined inline so no external file import is required
+const Theme = {
+  light: {
+    text: '#11181C',
+    background: '#fff',
+    tint: '#0a7ea4',
+    icon: '#687076',
+  },
+  dark: {
+    text: '#ECEDEE',
+    background: '#151718',
+    tint: '#fff',
+    icon: '#9BA1A6',
+  },
+};
+
 export default function ProfileScreen() {
+  const colorScheme = useColorScheme() ?? 'light';
+  const colors = Theme[colorScheme];
+  const isDark = colorScheme === 'dark';
+
   const { user, token, logout } = useAuth();
 
   const [profile, setProfile] = useState<Profile | null>(user);
@@ -55,50 +76,88 @@ export default function ProfileScreen() {
     profile?.email || user?.email || 'No email available';
   const displayRole = profile?.role || user?.role || 'Student';
 
+  // Dynamic theme variables
+  const dynamicStyles = {
+    container: { backgroundColor: colors.background },
+    textPrimary: { color: colors.text },
+    textSecondary: { color: colors.icon },
+    cardBackground: {
+      backgroundColor: isDark ? '#1E2022' : '#ffffff',
+      borderColor: isDark ? '#2A2D2F' : 'transparent',
+      borderWidth: isDark ? 1 : 0,
+    },
+    badgeBackground: {
+      backgroundColor: isDark ? '#1C2E36' : '#E6F4F8',
+    },
+    divider: {
+      backgroundColor: isDark ? '#2D3135' : '#F0F0F0',
+    },
+    errorCard: {
+      backgroundColor: isDark ? '#2A1A1D' : '#FFF1F4',
+      borderColor: isDark ? '#5C2229' : '#F5CCD9',
+    },
+    logoutButton: {
+      backgroundColor: isDark ? '#1E2022' : '#ffffff',
+      borderColor: isDark ? '#3A3D40' : '#E0E0E0',
+    },
+  };
+
   return (
     <ScrollView
-      contentContainerStyle={styles.container}
+      contentContainerStyle={[styles.container, dynamicStyles.container]}
       showsVerticalScrollIndicator={false}
     >
-      <View style={styles.backgroundCircleOne} />
-      <View style={styles.backgroundCircleTwo} />
+      <View
+        style={[
+          styles.backgroundCircleOne,
+          { backgroundColor: isDark ? '#1E293B' : '#E6F4F8' },
+        ]}
+      />
+      <View
+        style={[
+          styles.backgroundCircleTwo,
+          { backgroundColor: isDark ? '#111827' : '#F0F9FF' },
+        ]}
+      />
 
       <View style={styles.header}>
-        <View style={styles.logo}>
+        <View style={[styles.logo, { backgroundColor: colors.tint }]}>
           <Text style={styles.logoText}>
             {displayName.charAt(0).toUpperCase()}
           </Text>
         </View>
 
-        <Text style={styles.headerTitle}>My Profile</Text>
+        <Text style={[styles.headerTitle, dynamicStyles.textPrimary]}>
+          My Profile
+        </Text>
 
-        <Text style={styles.headerSubtitle}>
+        <Text style={[styles.headerSubtitle, dynamicStyles.textSecondary]}>
           Manage your student account
         </Text>
       </View>
 
       {loading && (
-        <View style={styles.loadingCard}>
-          <ActivityIndicator size="large" color="#e85d9e" />
+        <View style={[styles.loadingCard, dynamicStyles.cardBackground]}>
+          <ActivityIndicator size="large" color={colors.tint} />
 
-          <Text style={styles.loadingTitle}>
+          <Text style={[styles.loadingTitle, dynamicStyles.textPrimary]}>
             Loading profile...
           </Text>
 
-          <Text style={styles.loadingText}>
+          <Text style={[styles.loadingText, dynamicStyles.textSecondary]}>
             Please wait while we get your information.
           </Text>
         </View>
       )}
 
       {error ? (
-        <View style={styles.errorCard}>
+        <View style={[styles.errorCard, dynamicStyles.errorCard]}>
           <View style={styles.errorIcon}>
             <Text style={styles.errorIconText}>!</Text>
           </View>
 
           <View style={styles.errorContent}>
-            <Text style={styles.errorTitle}>
+            <Text style={[styles.errorTitle, dynamicStyles.textPrimary]}>
               Something went wrong
             </Text>
 
@@ -113,14 +172,14 @@ export default function ProfileScreen() {
       ) : null}
 
       {!loading && !error && !profile && (
-        <View style={styles.emptyCard}>
-          <Text style={styles.emptyIcon}>○</Text>
+        <View style={[styles.emptyCard, dynamicStyles.cardBackground]}>
+          <Text style={[styles.emptyIcon, { color: colors.tint }]}>○</Text>
 
-          <Text style={styles.emptyTitle}>
+          <Text style={[styles.emptyTitle, dynamicStyles.textPrimary]}>
             No profile loaded
           </Text>
 
-          <Text style={styles.emptyText}>
+          <Text style={[styles.emptyText, dynamicStyles.textSecondary]}>
             We couldn't find your profile information.
           </Text>
         </View>
@@ -128,100 +187,113 @@ export default function ProfileScreen() {
 
       {!loading && !error && profile && (
         <>
-          <View style={styles.profileCard}>
-            <View style={styles.avatar}>
+          <View style={[styles.profileCard, dynamicStyles.cardBackground]}>
+            <View style={[styles.avatar, { backgroundColor: colors.tint }]}>
               <Text style={styles.avatarText}>
                 {displayName.charAt(0).toUpperCase()}
               </Text>
             </View>
 
-            <Text style={styles.profileName}>
+            <Text style={[styles.profileName, dynamicStyles.textPrimary]}>
               {displayName}
             </Text>
 
-            <Text style={styles.profileEmail}>
+            <Text style={[styles.profileEmail, dynamicStyles.textSecondary]}>
               {displayEmail}
             </Text>
 
-            <View style={styles.roleBadge}>
-              <Text style={styles.roleBadgeText}>
+            <View
+              style={[
+                styles.roleBadge,
+                dynamicStyles.badgeBackground,
+              ]}
+            >
+              <Text style={[styles.roleBadgeText, { color: colors.tint }]}>
                 {displayRole.toUpperCase()}
               </Text>
             </View>
           </View>
 
-          <View style={styles.infoCard}>
+          <View style={[styles.infoCard, dynamicStyles.cardBackground]}>
             <View style={styles.cardHeader}>
-              <Text style={styles.cardTitle}>
+              <Text style={[styles.cardTitle, dynamicStyles.textPrimary]}>
                 Account Information
               </Text>
             </View>
 
             <View style={styles.infoRow}>
-              <View style={styles.infoIcon}>
-                <Text style={styles.infoIconText}>👤</Text>
+              <View style={[styles.infoIcon, dynamicStyles.badgeBackground]}>
+                <Text style={[styles.infoIconText, { color: colors.tint }]}>
+                  👤
+                </Text>
               </View>
 
               <View style={styles.infoContent}>
-                <Text style={styles.infoLabel}>
+                <Text style={[styles.infoLabel, dynamicStyles.textSecondary]}>
                   Full Name
                 </Text>
 
-                <Text style={styles.infoValue}>
+                <Text style={[styles.infoValue, dynamicStyles.textPrimary]}>
                   {displayName}
                 </Text>
               </View>
             </View>
 
-            <View style={styles.divider} />
+            <View style={[styles.divider, dynamicStyles.divider]} />
 
             <View style={styles.infoRow}>
-              <View style={styles.infoIcon}>
-                <Text style={styles.infoIconText}>✉</Text>
+              <View style={[styles.infoIcon, dynamicStyles.badgeBackground]}>
+                <Text style={[styles.infoIconText, { color: colors.tint }]}>
+                  ✉
+                </Text>
               </View>
 
               <View style={styles.infoContent}>
-                <Text style={styles.infoLabel}>
+                <Text style={[styles.infoLabel, dynamicStyles.textSecondary]}>
                   Email Address
                 </Text>
 
-                <Text style={styles.infoValue}>
+                <Text style={[styles.infoValue, dynamicStyles.textPrimary]}>
                   {displayEmail}
                 </Text>
               </View>
             </View>
 
-            <View style={styles.divider} />
+            <View style={[styles.divider, dynamicStyles.divider]} />
 
             <View style={styles.infoRow}>
-              <View style={styles.infoIcon}>
-                <Text style={styles.infoIconText}>★</Text>
+              <View style={[styles.infoIcon, dynamicStyles.badgeBackground]}>
+                <Text style={[styles.infoIconText, { color: colors.tint }]}>
+                  ★
+                </Text>
               </View>
 
               <View style={styles.infoContent}>
-                <Text style={styles.infoLabel}>
+                <Text style={[styles.infoLabel, dynamicStyles.textSecondary]}>
                   Account Role
                 </Text>
 
-                <Text style={styles.infoValue}>
+                <Text style={[styles.infoValue, dynamicStyles.textPrimary]}>
                   {displayRole}
                 </Text>
               </View>
             </View>
 
-            <View style={styles.divider} />
+            <View style={[styles.divider, dynamicStyles.divider]} />
 
             <View style={styles.infoRow}>
-              <View style={styles.infoIcon}>
-                <Text style={styles.infoIconText}>#</Text>
+              <View style={[styles.infoIcon, dynamicStyles.badgeBackground]}>
+                <Text style={[styles.infoIconText, { color: colors.tint }]}>
+                  #
+                </Text>
               </View>
 
               <View style={styles.infoContent}>
-                <Text style={styles.infoLabel}>
+                <Text style={[styles.infoLabel, dynamicStyles.textSecondary]}>
                   Student ID
                 </Text>
 
-                <Text style={styles.infoValue}>
+                <Text style={[styles.infoValue, dynamicStyles.textPrimary]}>
                   {profile.id || 'Not available'}
                 </Text>
               </View>
@@ -230,19 +302,17 @@ export default function ProfileScreen() {
         </>
       )}
 
-      <View style={styles.sessionCard}>
-        <View style={styles.sessionIcon}>
-          <Text style={styles.sessionIconText}>
-            ✓
-          </Text>
+      <View style={[styles.sessionCard, dynamicStyles.cardBackground]}>
+        <View style={[styles.sessionIcon, { backgroundColor: colors.tint }]}>
+          <Text style={styles.sessionIconText}>✓</Text>
         </View>
 
         <View style={styles.sessionContent}>
-          <Text style={styles.sessionTitle}>
+          <Text style={[styles.sessionTitle, dynamicStyles.textPrimary]}>
             Session Status
           </Text>
 
-          <Text style={styles.sessionText}>
+          <Text style={[styles.sessionText, dynamicStyles.textSecondary]}>
             {token
               ? 'Your account is authenticated'
               : 'You are not authenticated'}
@@ -252,6 +322,7 @@ export default function ProfileScreen() {
         <View
           style={[
             styles.sessionDot,
+            { backgroundColor: colors.tint },
             !token && styles.sessionDotInactive,
           ]}
         />
@@ -261,21 +332,20 @@ export default function ProfileScreen() {
         accessibilityRole="button"
         style={({ pressed }) => [
           styles.logoutButton,
+          dynamicStyles.logoutButton,
           pressed && styles.logoutPressed,
         ]}
         onPress={logout}
         disabled={!token}
       >
-        <Text style={styles.logoutIcon}>↪</Text>
+        <Text style={[styles.logoutIcon, { color: colors.tint }]}>↪</Text>
 
-        <Text style={styles.logoutText}>
+        <Text style={[styles.logoutText, { color: colors.tint }]}>
           Log Out
         </Text>
       </Pressable>
 
-      <Text style={styles.footer}>
-        StudentHub • Student Service Portal
-      </Text>
+      
     </ScrollView>
   );
 }
@@ -286,7 +356,6 @@ const styles = StyleSheet.create({
     padding: 24,
     paddingTop: 35,
     paddingBottom: 40,
-    backgroundColor: '#fff4f8',
     overflow: 'hidden',
   },
 
@@ -295,7 +364,6 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     borderRadius: 150,
-    backgroundColor: '#ffd8e9',
     top: -150,
     right: -100,
   },
@@ -305,7 +373,6 @@ const styles = StyleSheet.create({
     width: 240,
     height: 240,
     borderRadius: 120,
-    backgroundColor: '#fce1ed',
     bottom: -100,
     left: -120,
   },
@@ -319,18 +386,14 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 24,
-    backgroundColor: '#e85d9e',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
-    shadowColor: '#d94f8e',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 12,
-    elevation: 7,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 5,
   },
 
   logoText: {
@@ -340,42 +403,34 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    color: '#3b2631',
     fontSize: 28,
     fontWeight: '800',
   },
 
   headerSubtitle: {
-    color: '#8b7480',
     fontSize: 13,
     marginTop: 5,
   },
 
   loadingCard: {
-    backgroundColor: '#ffffff',
     borderRadius: 24,
     padding: 30,
     alignItems: 'center',
     marginBottom: 18,
-    shadowColor: '#b84d7f',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.08,
-    shadowRadius: 18,
-    elevation: 5,
+    shadowRadius: 10,
+    elevation: 3,
   },
 
   loadingTitle: {
-    color: '#49313d',
     fontSize: 16,
     fontWeight: '800',
     marginTop: 15,
   },
 
   loadingText: {
-    color: '#9b7f8c',
     fontSize: 12,
     textAlign: 'center',
     marginTop: 5,
@@ -384,9 +439,7 @@ const styles = StyleSheet.create({
   errorCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff1f4',
     borderWidth: 1,
-    borderColor: '#f5ccd9',
     borderRadius: 18,
     padding: 15,
     marginBottom: 18,
@@ -396,7 +449,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 13,
-    backgroundColor: '#e85d9e',
+    backgroundColor: '#E53E3E',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -413,20 +466,18 @@ const styles = StyleSheet.create({
   },
 
   errorTitle: {
-    color: '#49313d',
     fontSize: 13,
     fontWeight: '800',
     marginBottom: 3,
   },
 
   error: {
-    color: '#b84d6f',
+    color: '#E53E3E',
     fontSize: 12,
     lineHeight: 17,
   },
 
   emptyCard: {
-    backgroundColor: '#ffffff',
     borderRadius: 24,
     padding: 30,
     alignItems: 'center',
@@ -434,56 +485,45 @@ const styles = StyleSheet.create({
   },
 
   emptyIcon: {
-    color: '#e85d9e',
     fontSize: 38,
   },
 
   emptyTitle: {
-    color: '#49313d',
     fontSize: 16,
     fontWeight: '800',
     marginTop: 8,
   },
 
   emptyText: {
-    color: '#9b7f8c',
     fontSize: 12,
     textAlign: 'center',
     marginTop: 5,
   },
 
   profileCard: {
-    backgroundColor: '#ffffff',
     borderRadius: 26,
     padding: 26,
     alignItems: 'center',
     marginBottom: 18,
-    shadowColor: '#b84d7f',
-    shadowOffset: {
-      width: 0,
-      height: 9,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 20,
-    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 4,
   },
 
   avatar: {
     width: 86,
     height: 86,
     borderRadius: 30,
-    backgroundColor: '#e85d9e',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 13,
-    shadowColor: '#d94f8e',
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 10,
-    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 5,
   },
 
   avatarText: {
@@ -493,19 +533,16 @@ const styles = StyleSheet.create({
   },
 
   profileName: {
-    color: '#3b2631',
     fontSize: 21,
     fontWeight: '800',
   },
 
   profileEmail: {
-    color: '#927b87',
     fontSize: 13,
     marginTop: 4,
   },
 
   roleBadge: {
-    backgroundColor: '#fff0f6',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 10,
@@ -513,25 +550,20 @@ const styles = StyleSheet.create({
   },
 
   roleBadgeText: {
-    color: '#e85d9e',
     fontSize: 9,
     fontWeight: '800',
     letterSpacing: 0.8,
   },
 
   infoCard: {
-    backgroundColor: '#ffffff',
     borderRadius: 24,
     padding: 20,
     marginBottom: 18,
-    shadowColor: '#b84d7f',
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.08,
-    shadowRadius: 17,
-    elevation: 5,
+    shadowRadius: 10,
+    elevation: 3,
   },
 
   cardHeader: {
@@ -539,7 +571,6 @@ const styles = StyleSheet.create({
   },
 
   cardTitle: {
-    color: '#3b2631',
     fontSize: 17,
     fontWeight: '800',
   },
@@ -554,14 +585,12 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 13,
-    backgroundColor: '#fff0f6',
     justifyContent: 'center',
     alignItems: 'center',
   },
 
   infoIconText: {
     fontSize: 16,
-    color: '#e85d9e',
   },
 
   infoContent: {
@@ -570,46 +599,38 @@ const styles = StyleSheet.create({
   },
 
   infoLabel: {
-    color: '#a08792',
     fontSize: 10,
     fontWeight: '600',
     marginBottom: 3,
   },
 
   infoValue: {
-    color: '#49313d',
     fontSize: 14,
     fontWeight: '700',
   },
 
   divider: {
     height: 1,
-    backgroundColor: '#f5e8ee',
     marginVertical: 5,
   },
 
   sessionCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
     borderRadius: 20,
     padding: 17,
     marginBottom: 15,
-    shadowColor: '#b84d7f',
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.08,
-    shadowRadius: 14,
-    elevation: 4,
+    shadowRadius: 8,
+    elevation: 3,
   },
 
   sessionIcon: {
     width: 42,
     height: 42,
     borderRadius: 14,
-    backgroundColor: '#e85d9e',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -626,13 +647,11 @@ const styles = StyleSheet.create({
   },
 
   sessionTitle: {
-    color: '#49313d',
     fontSize: 14,
     fontWeight: '800',
   },
 
   sessionText: {
-    color: '#8b7480',
     fontSize: 12,
     marginTop: 3,
   },
@@ -641,20 +660,17 @@ const styles = StyleSheet.create({
     width: 9,
     height: 9,
     borderRadius: 5,
-    backgroundColor: '#e85d9e',
     marginRight: 4,
   },
 
   sessionDotInactive: {
-    backgroundColor: '#d8c5ce',
+    backgroundColor: '#8E8E93',
   },
 
   logoutButton: {
     height: 54,
     borderRadius: 16,
-    backgroundColor: '#ffffff',
     borderWidth: 1,
-    borderColor: '#f0cbdc',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -667,20 +683,17 @@ const styles = StyleSheet.create({
   },
 
   logoutIcon: {
-    color: '#d94f8e',
     fontSize: 20,
     marginRight: 8,
     fontWeight: '700',
   },
 
   logoutText: {
-    color: '#d94f8e',
     fontSize: 14,
     fontWeight: '800',
   },
 
   footer: {
-    color: '#b08c9d',
     fontSize: 11,
     textAlign: 'center',
   },

@@ -1,4 +1,3 @@
-```tsx
 import { useAuth } from '@/hooks/useAuth';
 import { Link } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -22,9 +21,7 @@ export default function DashboardScreen() {
         </View>
 
         <View style={styles.headerText}>
-          <Text style={styles.brand}>StudentHub</Text>
-          <Text style={styles.eyebrow}>STUDENT SERVICE PORTAL</Text>
-        </View>
+                  </View>
       </View>
 
       <View style={styles.welcomeSection}>
@@ -173,7 +170,6 @@ export default function DashboardScreen() {
       </View>
 
       <Text style={styles.footer}>
-        StudentHub • Student Service Portal
       </Text>
     </ScrollView>
   );
@@ -523,4 +519,4 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
 });
-```
+
