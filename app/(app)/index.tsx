@@ -1,3 +1,4 @@
+```tsx
 import { useAuth } from '@/hooks/useAuth';
 import { Link } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -108,8 +109,8 @@ export default function DashboardScreen() {
         <View style={styles.cardHeader}>
           <Text style={styles.cardTitle}>Student Information</Text>
 
-          <View style={styles.pinkBadge}>
-            <Text style={styles.pinkBadgeText}>STUDENT</Text>
+          <View style={styles.blueBadge}>
+            <Text style={styles.blueBadgeText}>STUDENT</Text>
           </View>
         </View>
 
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
     padding: 24,
     paddingTop: 35,
     paddingBottom: 40,
-    backgroundColor: '#fff4f8',
+    backgroundColor: '#f2f5fa',
     overflow: 'hidden',
   },
 
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     borderRadius: 150,
-    backgroundColor: '#ffd8e9',
+    backgroundColor: '#dce8f8',
     top: -150,
     right: -100,
   },
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
     width: 240,
     height: 240,
     borderRadius: 120,
-    backgroundColor: '#fce1ed',
+    backgroundColor: '#e5edf7',
     bottom: -100,
     left: -120,
   },
@@ -218,10 +219,10 @@ const styles = StyleSheet.create({
     width: 52,
     height: 52,
     borderRadius: 18,
-    backgroundColor: '#e85d9e',
+    backgroundColor: '#245bb2',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#d94f8e',
+    shadowColor: '#173f7a',
     shadowOffset: {
       width: 0,
       height: 6,
@@ -242,14 +243,14 @@ const styles = StyleSheet.create({
   },
 
   brand: {
-    color: '#442333',
+    color: '#17324d',
     fontSize: 20,
     fontWeight: '800',
     letterSpacing: 0.3,
   },
 
   eyebrow: {
-    color: '#e85d9e',
+    color: '#245bb2',
     fontSize: 9,
     fontWeight: '800',
     letterSpacing: 1.1,
@@ -261,7 +262,7 @@ const styles = StyleSheet.create({
   },
 
   greeting: {
-    color: '#e85d9e',
+    color: '#245bb2',
     fontSize: 11,
     fontWeight: '800',
     letterSpacing: 1.4,
@@ -269,14 +270,14 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: '#3b2631',
+    color: '#17324d',
     fontSize: 30,
     fontWeight: '800',
     letterSpacing: -0.7,
   },
 
   subtitle: {
-    color: '#8b7480',
+    color: '#536579',
     fontSize: 14,
     lineHeight: 21,
     marginTop: 7,
@@ -285,9 +286,9 @@ const styles = StyleSheet.create({
   statusCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff0f6',
+    backgroundColor: '#edf4fc',
     borderWidth: 1,
-    borderColor: '#f8d4e3',
+    borderColor: '#d2e0f1',
     borderRadius: 18,
     padding: 15,
     marginBottom: 18,
@@ -297,7 +298,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 14,
-    backgroundColor: '#e85d9e',
+    backgroundColor: '#245bb2',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -314,13 +315,13 @@ const styles = StyleSheet.create({
   },
 
   statusTitle: {
-    color: '#49313d',
+    color: '#17324d',
     fontSize: 14,
     fontWeight: '800',
   },
 
   statusText: {
-    color: '#9b7f8c',
+    color: '#536579',
     fontSize: 12,
     marginTop: 3,
   },
@@ -329,7 +330,7 @@ const styles = StyleSheet.create({
     width: 9,
     height: 9,
     borderRadius: 5,
-    backgroundColor: '#e85d9e',
+    backgroundColor: '#245bb2',
     marginRight: 4,
   },
 
@@ -338,7 +339,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     padding: 20,
     marginBottom: 18,
-    shadowColor: '#b84d7f',
+    shadowColor: '#49627d',
     shadowOffset: {
       width: 0,
       height: 8,
@@ -356,20 +357,20 @@ const styles = StyleSheet.create({
   },
 
   cardTitle: {
-    color: '#3b2631',
+    color: '#17324d',
     fontSize: 17,
     fontWeight: '800',
   },
 
-  pinkBadge: {
-    backgroundColor: '#fff0f6',
+  blueBadge: {
+    backgroundColor: '#edf4fc',
     borderRadius: 10,
     paddingHorizontal: 9,
     paddingVertical: 5,
   },
 
-  pinkBadgeText: {
-    color: '#e85d9e',
+  blueBadgeText: {
+    color: '#245bb2',
     fontSize: 9,
     fontWeight: '800',
     letterSpacing: 0.7,
@@ -379,9 +380,9 @@ const styles = StyleSheet.create({
     minHeight: 70,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff9fb',
+    backgroundColor: '#f8fafd',
     borderWidth: 1,
-    borderColor: '#f0dfe7',
+    borderColor: '#dce5ef',
     borderRadius: 17,
     padding: 12,
     marginBottom: 11,
@@ -396,7 +397,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 14,
-    backgroundColor: '#ffe4ef',
+    backgroundColor: '#e5eef9',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -411,19 +412,19 @@ const styles = StyleSheet.create({
   },
 
   actionTitle: {
-    color: '#49313d',
+    color: '#17324d',
     fontSize: 14,
     fontWeight: '800',
   },
 
   actionSubtitle: {
-    color: '#a08792',
+    color: '#6d7d8e',
     fontSize: 11,
     marginTop: 3,
   },
 
   arrow: {
-    color: '#e85d9e',
+    color: '#245bb2',
     fontSize: 28,
     fontWeight: '400',
     marginRight: 4,
@@ -439,7 +440,7 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: 12,
-    backgroundColor: '#fff0f6',
+    backgroundColor: '#edf4fc',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -450,21 +451,21 @@ const styles = StyleSheet.create({
   },
 
   infoLabel: {
-    color: '#a08792',
+    color: '#7c8b9a',
     fontSize: 10,
     fontWeight: '600',
     marginBottom: 3,
   },
 
   infoValue: {
-    color: '#49313d',
+    color: '#17324d',
     fontSize: 14,
     fontWeight: '700',
   },
 
   divider: {
     height: 1,
-    backgroundColor: '#f5e8ee',
+    backgroundColor: '#e7edf3',
     marginVertical: 5,
   },
 
@@ -474,7 +475,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 20,
     padding: 17,
-    shadowColor: '#b84d7f',
+    shadowColor: '#49627d',
     shadowOffset: {
       width: 0,
       height: 6,
@@ -488,7 +489,7 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 14,
-    backgroundColor: '#e85d9e',
+    backgroundColor: '#245bb2',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -504,21 +505,22 @@ const styles = StyleSheet.create({
   },
 
   sessionTitle: {
-    color: '#49313d',
+    color: '#17324d',
     fontSize: 14,
     fontWeight: '800',
   },
 
   sessionText: {
-    color: '#8b7480',
+    color: '#536579',
     fontSize: 12,
     marginTop: 3,
   },
 
   footer: {
-    color: '#b08c9d',
+    color: '#8493a3',
     fontSize: 11,
     textAlign: 'center',
     marginTop: 22,
   },
 });
+```
